@@ -5,10 +5,10 @@ import BookCard from './BookCard';
 import { Button } from '@/components/ui/button';
 
 const BookSwiper: React.FC = () => {
-  const { 
-    currentBook, 
-    remainingBooks, 
-    handleLike, 
+  const {
+    currentBook,
+    remainingBooks,
+    handleLike,
     handleDislike,
     resetRecommendations,
     likedBooks
@@ -23,7 +23,7 @@ const BookSwiper: React.FC = () => {
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto px-4">
       <div className="relative h-[520px] w-full">
         {currentBook ? (
-          <BookCard 
+          <BookCard
             book={currentBook}
             isActive={true}
             onSwipeLeft={() => {
@@ -38,11 +38,11 @@ const BookSwiper: React.FC = () => {
             <h3 className="text-2xl font-bold text-book-burgundy mb-2">All Done!</h3>
             <p className="text-gray-600 mb-4">
               You've gone through all our recommendations.
-              {likedBooks.length > 0 
-                ? " Check out your Liked Books!" 
+              {likedBooks.length > 0
+                ? " Check out your Liked Books!"
                 : " Try again to discover books you might enjoy."}
             </p>
-            <Button 
+            <Button
               onClick={resetRecommendations}
               className="bg-book-burgundy hover:bg-book-red text-white"
             >
@@ -53,22 +53,22 @@ const BookSwiper: React.FC = () => {
 
         {/* Preview of next books */}
         {remainingBooks.slice(0, 2).map((book, index) => (
-          <div 
-            key={book.id} 
+          <div
+            key={book.id}
             className="absolute top-4 left-0 w-full opacity-0 pointer-events-none"
             style={{ zIndex: -(index + 1) }}
           >
-            <BookCard 
+            <BookCard
               book={book}
               isActive={false}
-              onSwipeLeft={() => {}}
-              onSwipeRight={() => {}}
+              onSwipeLeft={() => { }}
+              onSwipeRight={() => { }}
             />
           </div>
         ))}
       </div>
 
-      <div className="mt-6 flex justify-center space-x-6">
+      {/* <div className="mt-6 flex justify-center space-x-6">
         <Button
           onClick={handleDislike}
           variant="outline"
@@ -86,7 +86,7 @@ const BookSwiper: React.FC = () => {
         >
           ♥
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
