@@ -1,12 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import { BookRecommendationProvider } from '../contexts/BookRecommendationContext';
+import BookSwiper from '../components/BookSwiper';
+import Library from '../components/Library';
+import Header from '../components/Header';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-book-paper">
+      <BookRecommendationProvider>
+        <Header />
+        <div className="container mx-auto px-4 pb-20">
+          <Tabs defaultValue="discover" className="w-full max-w-md mx-auto">
+            <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsTrigger value="discover" className="data-[state=active]:bg-book-burgundy data-[state=active]:text-white">
+                Discover
+              </TabsTrigger>
+              <TabsTrigger value="library" className="data-[state=active]:bg-book-burgundy data-[state=active]:text-white">
+                Library
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="discover">
+              <BookSwiper />
+            </TabsContent>
+            <TabsContent value="library">
+              <Library />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </BookRecommendationProvider>
     </div>
   );
 };

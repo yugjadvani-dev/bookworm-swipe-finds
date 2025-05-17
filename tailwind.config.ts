@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				book: {
+					red: '#8B3A3A',
+					burgundy: '#800020',
+					cream: '#F5F5DC',
+					paper: '#F8F4E3',
+					navy: '#1B365D',
+					gold: '#D4AF37',
+					brown: '#964B00',
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,44 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'swipe-right': {
+					from: { 
+						transform: 'translateX(0) rotate(0)',
+						opacity: '1'
+					},
+					to: { 
+						transform: 'translateX(200%) rotate(30deg)',
+						opacity: '0'
+					}
+				},
+				'swipe-left': {
+					from: { 
+						transform: 'translateX(0) rotate(0)', 
+						opacity: '1'
+					},
+					to: { 
+						transform: 'translateX(-200%) rotate(-30deg)',
+						opacity: '0'
+					}
+				},
+				'appear': {
+					from: { 
+						opacity: '0',
+						transform: 'scale(0.8)'
+					},
+					to: { 
+						opacity: '1',
+						transform: 'scale(1)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'swipe-right': 'swipe-right 0.5s forwards ease-out',
+				'swipe-left': 'swipe-left 0.5s forwards ease-out',
+				'appear': 'appear 0.3s forwards ease-out'
 			}
 		}
 	},
