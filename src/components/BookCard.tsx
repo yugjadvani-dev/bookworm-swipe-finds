@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Book } from '../types/book';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
 
 interface BookCardProps {
   book: Book;
@@ -109,7 +110,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
   };
 
   return (
-    <div 
+    <div
       className={cn(
         "absolute w-full max-w-md book-card transition-all duration-300",
         isActive ? "opacity-100" : "opacity-0 pointer-events-none",
@@ -125,9 +126,9 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
     >
       <div className="inner bg-white rounded-lg overflow-hidden shadow-xl">
         <div className="relative h-80 overflow-hidden">
-          <img 
-            src={book.coverImage} 
-            alt={book.title} 
+          <img
+            src={book.coverImage}
+            alt={book.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute top-4 right-4 flex gap-1">
@@ -148,9 +149,11 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
           </div>
           <p className="text-sm text-gray-700 line-clamp-3">{book.description}</p>
         </div>
-        
+
         <div className="flex justify-between p-4 bg-gradient-to-b from-book-cream to-white">
-          <button 
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => {
               setSwipeDirection('left');
               setTimeout(() => {
@@ -158,11 +161,13 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
                 setSwipeDirection(null);
               }, 300);
             }}
-            className="bg-white text-book-burgundy rounded-full p-3 shadow-md hover:bg-gray-100 transition-colors"
+            className="rounded-full h-10 w-10 border-2 border-gray-300 bg-white text-book-burgundy hover:bg-gray-100"
           >
             ✕
-          </button>
-          <button 
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => {
               setSwipeDirection('right');
               setTimeout(() => {
@@ -170,10 +175,10 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
                 setSwipeDirection(null);
               }, 300);
             }}
-            className="bg-book-burgundy text-white rounded-full p-3 shadow-md hover:bg-book-red transition-colors"
+            className="rounded-full h-10 w-10 border-2 border-gray-300 bg-white text-book-burgundy hover:bg-gray-100"
           >
             ♥
-          </button>
+          </Button>
         </div>
       </div>
     </div>
