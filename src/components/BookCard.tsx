@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Book } from '../types/book';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -16,6 +16,15 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
   const [startX, setStartX] = useState<number>(0);
   const [offsetX, setOffsetX] = useState<number>(0);
   const swipeThreshold = 100;
+
+  // Reset state when active book changes
+  useEffect(() => {
+    if (isActive) {
+      setSwipeDirection(null);
+      setStartX(0);
+      setOffsetX(0);
+    }
+  }, [book.id, isActive]);
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!isActive) return;
@@ -34,14 +43,24 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
 
     if (offsetX > swipeThreshold) {
       setSwipeDirection('right');
-      setTimeout(() => onSwipeRight(), 300);
+      setTimeout(() => {
+        onSwipeRight();
+        // Reset state after swipe action completes
+        setSwipeDirection(null);
+      }, 300);
     } else if (offsetX < -swipeThreshold) {
       setSwipeDirection('left');
-      setTimeout(() => onSwipeLeft(), 300);
+      setTimeout(() => {
+        onSwipeLeft();
+        // Reset state after swipe action completes
+        setSwipeDirection(null);
+      }, 300);
+    } else {
+      // Reset if no swipe threshold met
+      setOffsetX(0);
     }
 
     setStartX(0);
-    setOffsetX(0);
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -63,14 +82,24 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
 
     if (offsetX > swipeThreshold) {
       setSwipeDirection('right');
-      setTimeout(() => onSwipeRight(), 300);
+      setTimeout(() => {
+        onSwipeRight();
+        // Reset state after swipe action completes
+        setSwipeDirection(null);
+      }, 300);
     } else if (offsetX < -swipeThreshold) {
       setSwipeDirection('left');
-      setTimeout(() => onSwipeLeft(), 300);
+      setTimeout(() => {
+        onSwipeLeft();
+        // Reset state after swipe action completes
+        setSwipeDirection(null);
+      }, 300);
+    } else {
+      // Reset if no swipe threshold met
+      setOffsetX(0);
     }
 
     setStartX(0);
-    setOffsetX(0);
   };
 
   const cardStyle = {
@@ -124,7 +153,10 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
           <button 
             onClick={() => {
               setSwipeDirection('left');
-              setTimeout(() => onSwipeLeft(), 300);
+              setTimeout(() => {
+                onSwipeLeft();
+                setSwipeDirection(null);
+              }, 300);
             }}
             className="bg-white text-book-burgundy rounded-full p-3 shadow-md hover:bg-gray-100 transition-colors"
           >
@@ -133,7 +165,10 @@ const BookCard: React.FC<BookCardProps> = ({ book, isActive, onSwipeLeft, onSwip
           <button 
             onClick={() => {
               setSwipeDirection('right');
-              setTimeout(() => onSwipeRight(), 300);
+              setTimeout(() => {
+                onSwipeRight();
+                setSwipeDirection(null);
+              }, 300);
             }}
             className="bg-book-burgundy text-white rounded-full p-3 shadow-md hover:bg-book-red transition-colors"
           >

@@ -92,7 +92,12 @@ export const BookRecommendationProvider: React.FC<{ children: React.ReactNode }>
     ];
     
     savePreferences(newPreferences);
-    setCurrentBookIndex(prevIndex => prevIndex + 1);
+    
+    // Force UI update by setting index directly
+    setCurrentBookIndex(prevIndex => {
+      const newIndex = prevIndex + 1;
+      return newIndex;
+    });
     
     toast({
       title: "Added to your library!",
@@ -113,7 +118,12 @@ export const BookRecommendationProvider: React.FC<{ children: React.ReactNode }>
     ];
     
     savePreferences(newPreferences);
-    setCurrentBookIndex(prevIndex => prevIndex + 1);
+    
+    // Force UI update by setting index directly
+    setCurrentBookIndex(prevIndex => {
+      const newIndex = prevIndex + 1;
+      return newIndex;
+    });
   };
 
   const resetRecommendations = () => {

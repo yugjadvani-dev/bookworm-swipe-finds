@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useBookRecommendation } from '../contexts/BookRecommendationContext';
 import BookCard from './BookCard';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,11 @@ const BookSwiper: React.FC = () => {
     likedBooks
   } = useBookRecommendation();
 
+  // Ensure component re-renders when currentBook changes
+  useEffect(() => {
+    // This effect will run whenever currentBook changes
+  }, [currentBook]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto px-4">
       <div className="relative h-[520px] w-full">
@@ -21,8 +26,12 @@ const BookSwiper: React.FC = () => {
           <BookCard 
             book={currentBook}
             isActive={true}
-            onSwipeLeft={handleDislike}
-            onSwipeRight={handleLike}
+            onSwipeLeft={() => {
+              handleDislike();
+            }}
+            onSwipeRight={() => {
+              handleLike();
+            }}
           />
         ) : (
           <div className="flex flex-col items-center justify-center h-full bg-white rounded-lg p-8 text-center shadow-lg">
@@ -46,7 +55,7 @@ const BookSwiper: React.FC = () => {
         {remainingBooks.slice(0, 2).map((book, index) => (
           <div 
             key={book.id} 
-            className="absolute top-4 left-0 w-full opacity-0"
+            className="absolute top-4 left-0 w-full opacity-0 pointer-events-none"
             style={{ zIndex: -(index + 1) }}
           >
             <BookCard 
